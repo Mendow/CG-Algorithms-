@@ -1,4 +1,3 @@
-/*change structure array to model [[],[],[]]*/
 function multiplyMatrix(A, B) {
     'use strict';
     var rowsA = A.length,
@@ -28,50 +27,39 @@ function multiplyMatrix(A, B) {
     return C;
 }
 
-var rotation = function (fi) {
+function Matrix() {
     'use strict';
-    return [Math.cos(this.fi), Math.sin(this.fi), 0,
-            -Math.sin(this.fi), Math.cos(this.fi), 0,
-            0, 0, 1];
-};
+    return [arguments[0], arguments[1], arguments[2]];
+}
+var m = new Matrix([1, 2, 1], [1, 2, 1], [1, 2, 1]),
+    A = new Matrix([1], [1], [0]);
+console.log(A);
 
+
+function Rotation(fi) {
+    'use strict';
+    return new Matrix([Math.cos(fi), Math.sin(fi), 0], [-Math.sin(fi), Math.cos(fi), 0], [0, 0, 1]);
+}
+var roteMatrix = new Rotation(45),
+    rotA = multiplyMatrix(roteMatrix, A);
+console.log(rotA);
 
 var dilatation = function (a, b) {
     'use strict';
-    return [this.a, 0, 0,
-            0, this.b, 0,
-            0, 0, 1];
+    return new Matrix([this.a, 0, 0], [0, this.b, 0], [0, 0, 1]);
 };
 
 var reflection = function () {
     'use strict';
-    return [1, 0, 0,
-            0, -1, 0,
-            0, 0, 1];
+    return new Matrix([1, 0, 0], [0, -1, 0], [0, 0, 1]);
 };
 
 var translation = function (gamma, myu) {
     'use strict';
-    return [1, 0, 0,
-            0, 1, 0,
-            this.gamma, this.myu, 1];
+    return new Matrix([1, 0, 0], [0, 1, 0], [this.gamma, this.myu, 1]);
 };
 
 function vector(x, y) {
     'use strict';
-    return [x, 0, 0,
-            y, 0, 0,
-            0, 0, 1];
+    return new Matrix([x, 0, 0], [y, 0, 0], [0, 0, 1]);
 }
-/*Action*/
-var dot = new vector(7, 7),
-    xplace = 0,
-    yplace = 3;
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-ctx.fillRect(dot[xplace], dot[yplace], 3, 3);
-var newdot = multiplyMatrix(dot,dilatation);
-ctx.fillRect(newdot[xplace], newdot[yplace], 3, 3);
-
-
-alert('a');
