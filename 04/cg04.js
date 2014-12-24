@@ -72,3 +72,6 @@ var ctx = c.getContext("2d");
 ctx.fillRect(dot[xplace], dot[yplace], 3, 3);
 var newdot = multiplyMatrix(dot,dilatation);
 ctx.fillRect(newdot[xplace], newdot[yplace], 3, 3);
+
+
+alert('a');
